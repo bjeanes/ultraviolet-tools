@@ -1,6 +1,6 @@
 = ultraviolet-tools
 
-Description goes here.
+Some command line utilities for turning textmate bundles into themes and syntaxes for UltraViolet, and placing them in a custom directory.
 
 == Copyright
 
