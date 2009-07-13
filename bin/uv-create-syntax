@@ -1,0 +1,42 @@
+#! /usr/bin/env ruby
+
+begin
+   require 'plist'
+rescue LoadError
+   require 'rubygems'
+   require 'plist'
+end
+
+def create_syntax(syntax_file, output_dir)
+  file = File.basename(syntax_file)
+  
+  begin
+    syntax        = Plist.parse_xml(syntax_file)
+    name = File.basename(syntax_file).downcase.gsub(/.(tmlanguage|plist)$/, '').gsub(/[^a-z]/, '_').gsub(/_+/, '_')
+    FileUtils.mkdir_p(File.join(output_dir, "render"))
+    File.open( File.join( output_dir, "render", "#{name}.render" ), "w" ) {|f| YAML.dump( syntax, f ) }
+
+    puts %Q[Creating syntax from "#{file}"]
+  rescue
+    $stderr.puts %Q[Could not create syntax from "#{file}"]
+  end
+end  
+
+tm_syntax  = File.expand_path(ARGV[0])
+output_dir = File.expand_path(ARGV[1] || ".")
+
+if File.directory? tm_syntax 
+  # assume it's a tmBundle and iterate over each tmLanguage file
+  
+  syntaxes = File.join(tm_syntax, "Syntaxes")
+  
+  abort "No syntaxes found in #{syntaxes}" unless File.exists?(syntaxes)
+  
+  Dir.chdir(syntaxes) do
+    Dir["*"].each do |syntax|
+      create_syntax(File.join(Dir.pwd, syntax), output_dir)
+    end
+  end
+else
+  create_syntax(tm_syntax, output_dir)
+end
