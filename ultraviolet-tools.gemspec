@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ultraviolet-tools}
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Bodaniel Jeanes"]
@@ -18,7 +18,11 @@ Gem::Specification.new do |s|
      ".gitignore",
      "LICENSE",
      "README.rdoc",
-     "Rakefile"
+     "Rakefile",
+     "VERSION",
+     "bin/uv-create-syntax",
+     "bin/uv-create-theme",
+     "ultraviolet-tools.gemspec"
   ]
   s.homepage = %q{http://github.com/bjeanes/ultraviolet-tools}
   s.rdoc_options = ["--charset=UTF-8"]

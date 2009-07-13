@@ -136,7 +136,7 @@ END
 
 render["document"] = tag
 
-File.mkdir_p(File.join(base_dir, "xhtml", "files", "css"))
+FileUtils.mkdir_p(File.join(base_dir, "xhtml", "files", "css"))
 
 File.open( File.join( base_dir, "xhtml", "#{standard_name}.render" ), "w" ) {|f| YAML.dump( render, f ) }
 
